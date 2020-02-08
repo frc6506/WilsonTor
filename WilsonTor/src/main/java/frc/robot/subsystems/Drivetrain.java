@@ -35,12 +35,12 @@ import frc.robot.utils.Limelight;
 public class Drivetrain extends Subsystem {
   // Drivetrain
 
-  Spark leftMotor1 = new Spark(RobotMap.MOTOR_LEFT_1_ID);
-  Spark leftMotor2 = new Spark(RobotMap.MOTOR_LEFT_2_ID);
-  Spark rightMotor1 = new Spark(RobotMap.MOTOR_RIGHT_1_ID);
-  Spark rightMotor2 = new Spark(RobotMap.MOTOR_RIGHT_2_ID);
-  SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftMotor1, leftMotor2);
-  SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMotor1, rightMotor2);
+  Spark leftMotorFront = new Spark(RobotMap.MOTOR_LEFT_FRONT_ID);
+  Spark leftMotorBack = new Spark(RobotMap.MOTOR_LEFT_BACK_ID);
+  Spark rightMotorFront = new Spark(RobotMap.MOTOR_RIGHT_FRONT_ID);
+  Spark rightMotorBack = new Spark(RobotMap.MOTOR_RIGHT_BACK_ID);
+  SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftMotorFront, leftMotorBack);
+  SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMotorFront, rightMotorBack);
 
   DifferentialDrive dualDrive = new DifferentialDrive(leftMotors, rightMotors);
 
@@ -66,9 +66,9 @@ public class Drivetrain extends Subsystem {
   }
 
   // PID
-  double P = 0.009;
-  double I = 0;
-  double D = 0;
+  double P = 0.04;
+  double I = 0.01;
+  double D = 0.005;
   PIDController pid = new PIDController(P, I, D);
 
   // wrappers
