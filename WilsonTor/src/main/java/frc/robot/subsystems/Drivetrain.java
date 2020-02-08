@@ -68,7 +68,7 @@ public class Drivetrain extends Subsystem {
   // PID
   double P = 0.04;
   double I = 0.01;
-  double D = 0.005;
+  double D = 0.0;
   PIDController pid = new PIDController(P, I, D);
 
   // wrappers
