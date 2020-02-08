@@ -17,10 +17,17 @@ import edu.wpi.first.wpilibj.Spark;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
+//PID
+import edu.wpi.first.wpilibj.controller.PIDController;
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
+
 // limelight stuff
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.Drive;
 
@@ -39,13 +46,45 @@ public class Drivetrain extends Subsystem {
   // average
   double average = 0.0;
 
-  // Wrapper classes
+  // Gyro
+  public AHRS gyro;
+
+  public void initializeGyro() {
+    try {
+      gyro = new AHRS(SPI.Port.kMXP);
+    } catch (RuntimeException ex) {
+      DriverStation.reportError("Error instantiating navX MXP", true);
+    }
+  }
+
+  public void calibrate() {
+    gyro.zeroYaw();
+  }
+
+  // PID
+  double P = 0.09;
+  double I = 0;
+  double D = 0;
+  PIDController pid = new PIDController(P, I, D);
+
+  // wrappers
+
+  public void driveStraight(double speed) {
+    dualDrive.arcadeDrive(speed, pid.calculate(gyro.getAngle(), 0));
+    SmartDashboard.putNumber("gyro", gyro.getAngle());
+  }
+
   public void drive(double speed, double rotation) {
     dualDrive.arcadeDrive(speed, rotation);
   }
 
   public void oldDrive(double leftSpeed, double rightSpeed) {
     dualDrive.tankDrive(leftSpeed, rightSpeed);
+  }
+
+  public void rotateToAngle(double angle) {
+    dualDrive.arcadeDrive(0, pid.calculate(gyro.getAngle(), angle));
+    SmartDashboard.putNumber("gyro", gyro.getAngle());
   }
 
   @Override
