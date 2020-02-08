@@ -10,10 +10,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANEncoder;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -35,10 +33,14 @@ import frc.robot.commands.Drive;
 public class Drivetrain extends Subsystem {
   // Drivetrain
 
-  Spark leftMotor = new Spark(RobotMap.MOTOR_LEFT_ID);
-  Spark rightMotor = new Spark(RobotMap.MOTOR_RIGHT_ID);
+  Spark leftMotor1 = new Spark(RobotMap.MOTOR_LEFT_1_ID);
+  Spark leftMotor2 = new Spark(RobotMap.MOTOR_LEFT_2_ID);
+  Spark rightMotor1 = new Spark(RobotMap.MOTOR_RIGHT_1_ID);
+  Spark rightMotor2 = new Spark(RobotMap.MOTOR_RIGHT_2_ID);
+  SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftMotor1, leftMotor2);
+  SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightMotor1, rightMotor2);
 
-  DifferentialDrive dualDrive = new DifferentialDrive(leftMotor, rightMotor);
+  DifferentialDrive dualDrive = new DifferentialDrive(leftMotors, rightMotors);
 
   // limelight table to read offset value from
   NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
