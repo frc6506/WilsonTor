@@ -30,6 +30,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.Drive;
+import frc.robot.commands.RotateToAngle;
+import frc.robot.utils.Limelight;
 
 /** Drivetrain class w/ limelight vision tracking */
 public class Drivetrain extends Subsystem {
@@ -62,7 +64,7 @@ public class Drivetrain extends Subsystem {
   }
 
   // PID
-  double P = 0.09;
+  double P = 0.009;
   double I = 0;
   double D = 0;
   PIDController pid = new PIDController(P, I, D);
@@ -87,10 +89,15 @@ public class Drivetrain extends Subsystem {
     SmartDashboard.putNumber("gyro", gyro.getAngle());
   }
 
+  public void trackTarget(){
+    dualDrive.arcadeDrive(0, pid.calculate(Limelight.returnHorizontalOffset()));
+    
+  }
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new Drive());
+    setDefaultCommand(new RotateToAngle());
   }
 }
