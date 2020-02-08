@@ -15,7 +15,7 @@ public class Limelight {
     return limelightTable.getEntry("ty").getDouble(0.00);
   }
 
-  public static double returnAngle(){
-    return limelightTable.getEntry("").getDouble(0.00); 
+  public static double returnAngle() {
+    return limelightTable.getEntry("").getDouble(0.00);
   }
 }

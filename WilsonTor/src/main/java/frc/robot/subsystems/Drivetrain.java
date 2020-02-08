@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
-//PID
+// PID
 import edu.wpi.first.wpilibj.controller.PIDController;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
@@ -91,9 +91,8 @@ public class Drivetrain extends Subsystem {
     SmartDashboard.putNumber("gyro", gyro.getAngle());
   }
 
-  public void trackTarget(){
+  public void trackTarget() {
     dualDrive.arcadeDrive(0, pid.calculate(Limelight.returnHorizontalOffset()));
-    
   }
 
   @Override
