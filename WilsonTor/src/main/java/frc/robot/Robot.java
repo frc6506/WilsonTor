@@ -45,7 +45,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_oi = new OI();
     drivetrain.initializeGyro();
-    drivetrain.calibrate();
+    //drivetrain.calibrate();
   }
 
   /**
@@ -92,8 +92,9 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
 
+  }
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {

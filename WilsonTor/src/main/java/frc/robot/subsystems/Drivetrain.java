@@ -67,8 +67,8 @@ public class Drivetrain extends Subsystem {
 
   // PID
   double P = 0.04;
-  double I = 0.01;
-  double D = 0.0;
+  double I = 0.0;
+  double D = 0.0055;
   PIDController pid = new PIDController(P, I, D);
 
   // wrappers
@@ -89,6 +89,7 @@ public class Drivetrain extends Subsystem {
   public void rotateToAngle(double angle) {
     dualDrive.arcadeDrive(0, pid.calculate(gyro.getAngle(), angle));
     SmartDashboard.putNumber("gyro", gyro.getAngle());
+    
   }
 
   public void trackTarget() {
@@ -99,6 +100,6 @@ public class Drivetrain extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new RotateToAngle());
+    setDefaultCommand(new Drive());
   }
 }

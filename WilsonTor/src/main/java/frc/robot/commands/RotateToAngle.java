@@ -19,18 +19,27 @@ public class RotateToAngle extends Command {
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {}
+  protected void initialize() {
+    Robot.drivetrain.calibrate();
+  }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    
+    Robot.drivetrain.calibrate();
     Robot.drivetrain.rotateToAngle(90);
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    if (Math.abs(Robot.drivetrain.gyro.getAngle() - 90) <= 1) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   // Called once after isFinished returns true
