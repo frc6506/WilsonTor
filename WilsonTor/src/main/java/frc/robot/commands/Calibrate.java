@@ -7,12 +7,11 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class RotateToAngle extends Command {
-  public RotateToAngle() {
+public class Calibrate extends Command {
+  public Calibrate() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.drivetrain);
@@ -21,27 +20,18 @@ public class RotateToAngle extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.drivetrain.calibrate();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    
-    Robot.drivetrain.rotateToAngle(90);
-
+    Robot.drivetrain.calibrate();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if (Math.abs(Robot.drivetrain.gyro.getAngle() - 90) <= 1) {
-      Timer.delay(1);
-      Robot.drivetrain.calibrate();
-      return true;
-    } else {
-      return false;
-    }
+    return false;
   }
 
   // Called once after isFinished returns true
@@ -52,5 +42,6 @@ public class RotateToAngle extends Command {
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
-  protected void interrupted() {}
+  protected void interrupted() {
+  }
 }
