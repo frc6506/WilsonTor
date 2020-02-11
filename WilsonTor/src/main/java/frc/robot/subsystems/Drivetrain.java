@@ -89,7 +89,6 @@ public class Drivetrain extends Subsystem {
   public void rotateToAngle(double angle) {
     dualDrive.arcadeDrive(0, pid.calculate(gyro.getAngle(), angle));
     SmartDashboard.putNumber("gyro", gyro.getAngle());
-    
   }
 
   public void trackTarget() {
