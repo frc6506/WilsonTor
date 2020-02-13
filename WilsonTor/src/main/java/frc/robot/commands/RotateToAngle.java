@@ -20,6 +20,7 @@ public class RotateToAngle extends Command {
   private PIDController pid = new PIDController(P, I, D);
   private double gryoSetPoint;
   private double commandStartTime;
+
   public RotateToAngle(double gsp) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -33,7 +34,6 @@ public class RotateToAngle extends Command {
   @Override
   protected void initialize() {
     Robot.drivetrain.calibrate();
-    
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -45,13 +45,11 @@ public class RotateToAngle extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(Timer.getFPGATimestamp() > commandStartTime + 2) {
+    if (Timer.getFPGATimestamp() > commandStartTime + 2) {
       return true;
-    }
-    else {
+    } else {
       return pid.atSetpoint();
     }
-    
   }
 
   // Called once after isFinished returns true
