@@ -14,5 +14,5 @@ jobs:
       with:
         java-version: 1.11
     - name: Build with Gradle
-      run:  cd WilsonTor ./gradlew build
+      run:  cd WilsonTor  && ./gradlew build
       
