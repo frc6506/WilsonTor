@@ -66,17 +66,14 @@ public class Drivetrain extends Subsystem {
   }
 
   // PID
-  double P = 0.04;
-  double I = 0.0;
-  double D = 0.0055;
-  PIDController pid = new PIDController(P, I, D);
+  
 
   // wrappers
 
-  public void driveStraight(double speed) {
+  /*public void driveStraight(double speed) {
     dualDrive.arcadeDrive(speed, pid.calculate(gyro.getAngle(), 0));
     SmartDashboard.putNumber("gyro", gyro.getAngle());
-  }
+  }*/
 
   public void drive(double speed, double rotation) {
     dualDrive.arcadeDrive(speed, rotation);
@@ -86,14 +83,9 @@ public class Drivetrain extends Subsystem {
     dualDrive.tankDrive(leftSpeed, rightSpeed);
   }
 
-  public void rotateToAngle(double angle) {
-    dualDrive.arcadeDrive(0, pid.calculate(gyro.getAngle(), angle));
-    SmartDashboard.putNumber("gyro", gyro.getAngle());
-  }
-
-  public void trackTarget() {
+  /*public void trackTarget() {
     dualDrive.arcadeDrive(0, pid.calculate(Limelight.returnHorizontalOffset()));
-  }
+  }*/
 
   @Override
   public void initDefaultCommand() {

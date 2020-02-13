@@ -18,7 +18,7 @@ public class CalibrateThenRotate extends CommandGroup {
     // these will run in order.
 
     addSequential(new Calibrate());
-    addSequential(new RotateToAngle());
+    addSequential(new RotateToAngle(90));
 
     // To run multiple commands at the same time,
     // use addParallel()
