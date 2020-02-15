@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.RotateToAngle;
+import frc.robot.commands.RotateToAngleInterupt;
 import frc.robot.commands.Calibrate;
 import frc.robot.commands.CalibrateThenRotate;
 /**
@@ -34,7 +35,8 @@ public class OI {
   // by subclassing Button you can create custom triggers and bind those to
   // commands the same as any other Button.
   public OI() {
-    bbutton.whenPressed(new RotateToAngle(90));
+    bbutton.whenPressed(new RotateToAngle(90, false));
+    bbutton.whenReleased(new RotateToAngleInterupt());
   }
   //// TRIGGERING COMMANDS WITH BUTTONS
   // Once you have a button, it's trivial to bind it to a button in one of

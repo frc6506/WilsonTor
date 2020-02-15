@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.controller.PIDController;
+import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.subsystems.Drivetrain;
 
@@ -20,7 +21,12 @@ public class RotateToAngle extends Command {
   private PIDController pid = new PIDController(P, I, D);
   private double gryoSetPoint;
   private double commandStartTime;
+  private boolean runDureingButtonPressDisable;
 
+  /**
+   * @deprecated true
+   * @param gsp
+   */
   public RotateToAngle(double gsp) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -28,6 +34,21 @@ public class RotateToAngle extends Command {
     gryoSetPoint = gsp;
     pid.setTolerance(0.05 * gryoSetPoint);
     commandStartTime = Timer.getFPGATimestamp();
+    runDureingButtonPressDisable = true;
+  }
+  /**
+   * 
+   * @param gsp
+   * @param rDBP
+   */
+  public RotateToAngle(double gsp, boolean rDBP) {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    requires(Robot.drivetrain);
+    gryoSetPoint = gsp;
+    pid.setTolerance(0.05 * gryoSetPoint);
+    commandStartTime = Timer.getFPGATimestamp();
+    runDureingButtonPressDisable = rDBP;
   }
 
   // Called just before this Command runs the first time
@@ -45,10 +66,17 @@ public class RotateToAngle extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if (Timer.getFPGATimestamp() > commandStartTime + 2) {
+    if (Timer.getFPGATimestamp() > commandStartTime + 2 && runDureingButtonPressDisable) {
       return true;
-    } else {
+    }
+    else if(runDureingButtonPressDisable) {
       return pid.atSetpoint();
+    }
+    else if (!RotateToAngleInterupt.getDisabled()) {
+      return pid.atSetpoint();
+    }
+    else {
+      return false;
     }
   }
 
