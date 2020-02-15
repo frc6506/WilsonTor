@@ -37,7 +37,6 @@ public class RotateToAngle extends Command {
     runDureingButtonPressDisable = true;
   }
   /**
-   * 
    * @param gsp
    * @param rDBP
    */
@@ -68,14 +67,11 @@ public class RotateToAngle extends Command {
   protected boolean isFinished() {
     if (Timer.getFPGATimestamp() > commandStartTime + 2 && runDureingButtonPressDisable) {
       return true;
-    }
-    else if(runDureingButtonPressDisable) {
+    } else if (runDureingButtonPressDisable) {
       return pid.atSetpoint();
-    }
-    else if (!RotateToAngleInterupt.getDisabled()) {
+    } else if (!RotateToAngleInterupt.getDisabled()) {
       return pid.atSetpoint();
-    }
-    else {
+    } else {
       return false;
     }
   }
