@@ -28,6 +28,8 @@ public class RobotMap {
 
   public static final int MOTOR_ARM_ID = 0;
 
+  public static final int MOTOR_SENSOR_ID = 0;
+
   public static final int MOTOR_MAILBOX_ID = 0;
 
   public static final int MOTOR_LEFT_FRONT_ID = 0;
