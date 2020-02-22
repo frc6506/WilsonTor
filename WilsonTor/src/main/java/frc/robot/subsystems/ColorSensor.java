@@ -53,15 +53,15 @@ public class ColorSensor extends Subsystem {
   public void reportColorToDashboard() {
     // color algorithm
     if (match.color == kBlueTarget) {
-        colorString = "Blue";
+      colorString = "Blue";
     } else if (match.color == kGreenTarget) {
-        colorString = "Green";
+      colorString = "Green";
     } else if (match.color == kRedTarget) {
-        colorString = "Red";
+      colorString = "Red";
     } else if (match.color == kYellowTarget) {
-        colorString = "Yellow";
+      colorString = "Yellow";
     } else {
-        colorString = "Unknown";
+      colorString = "Unknown";
     }
     // putting the values onto Shuffleboard
     SmartDashboard.putNumber("Red", detectedColor.red);
@@ -78,11 +78,11 @@ public class ColorSensor extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-  // Set the default command for a subsystem here.
-  // setDefaultCommand(new MySpecialCommand());
+    // Set the default command for a subsystem here.
+    // setDefaultCommand(new MySpecialCommand());
   }
 
-public Color getColor() {
-	return m_colorSensor.getColor();
-}
+  public Color getColor() {
+    return m_colorSensor.getColor();
+  }
 }

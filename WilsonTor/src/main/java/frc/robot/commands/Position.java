@@ -20,6 +20,7 @@ public class Position extends Command {
     // eg. requires(chassis);
     requires(Robot.sensor);
   }
+
   public Color initialColor;
   public Color testedColor;
   public Color prevColor;
@@ -29,23 +30,19 @@ public class Position extends Command {
   private final Color RED = ColorMatch.makeColor(0.561, 0.232, 0.114);
   private final Color YELLOW = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
-
-
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     Robot.sensor.turn(0.5);
-
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    
-    
+
     testedColor = Robot.sensor.getColor();
-    if(testedColor.equals(initialColor) && !(testedColor.equals(prevColor))) {
-        colorCount++;
+    if (testedColor.equals(initialColor) && !(testedColor.equals(prevColor))) {
+      colorCount++;
     }
     prevColor = Robot.sensor.getColor();
   }
@@ -55,38 +52,35 @@ public class Position extends Command {
   protected boolean isFinished() {
     String gameData;
     gameData = DriverStation.getInstance().getGameSpecificMessage();
-    if(gameData.length() > 0)
-    {
-    switch (gameData.charAt(0))
-    {
-        case 'B' :
-          if(Robot.sensor.getColor().equals(RED)) {
+    if (gameData.length() > 0) {
+      switch (gameData.charAt(0)) {
+        case 'B':
+          if (Robot.sensor.getColor().equals(RED)) {
             return true;
           }
-        break;
-        case 'G' :
-          if(Robot.sensor.getColor().equals(YELLOW)) {
+          break;
+        case 'G':
+          if (Robot.sensor.getColor().equals(YELLOW)) {
             return true;
           }
-        break;
-        case 'R' :
-          if(Robot.sensor.getColor().equals(BLUE)) {
+          break;
+        case 'R':
+          if (Robot.sensor.getColor().equals(BLUE)) {
             return true;
           }
-        break;
-        case 'Y' :
-          if(Robot.sensor.getColor().equals(GREEN)) {
+          break;
+        case 'Y':
+          if (Robot.sensor.getColor().equals(GREEN)) {
             return true;
           }
-        break;
-        default :
-            return true;
-    }
+          break;
+        default:
+          return true;
+      }
     } else {
-        return true;
+      return true;
     }
     return false;
-
   }
 
   // Called once after isFinished returns true
