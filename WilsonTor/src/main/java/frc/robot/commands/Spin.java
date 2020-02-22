@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.I2C;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import edu.wpi.first.wpilibj.util.Color;
+import frc.robot.OI;
 
 public class Spin extends Command {
   public Spin() {
@@ -37,13 +38,14 @@ public class Spin extends Command {
   protected void initialize() {
     initialColor = Robot.sensor.getColor();
     previousColor = Robot.sensor.getColor();
-    // start turning
-    Robot.sensor.turn(0.5);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.sensor.commandHalfSpins = halfSpins;
+    Robot.sensor.commandFullSpins = fullSpins;
+
     currentColor = Robot.sensor.getColor();
 
     // if sensor sees initial color and the wheel has moved, then the wheel has turned halfway
@@ -54,6 +56,7 @@ public class Spin extends Command {
     }
 
     previousColor = Robot.sensor.getColor();
+    Robot.sensor.turn(0.5);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -63,6 +66,7 @@ public class Spin extends Command {
     if (fullSpins > 3) {
       return true;
     }
+  
     return false;
   }
 

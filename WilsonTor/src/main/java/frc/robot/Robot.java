@@ -26,6 +26,7 @@ import frc.robot.subsystems.ColorSensor;
 import com.revrobotics.ColorSensorV3;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorMatch;
+import frc.robot.commands.Spin;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -65,6 +66,8 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     SmartDashboard.putNumber("tx", Limelight.returnHorizontalOffset());
     SmartDashboard.putNumber("ty", Limelight.returnVerticalOffset());
+    sensor.updateColor();
+    sensor.reportColorToDashboard();
   }
   /**
    * This function is called once each time the robot enters Disabled mode. You can use it to reset

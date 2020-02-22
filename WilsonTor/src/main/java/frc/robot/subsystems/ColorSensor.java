@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.RobotMap;
+import frc.robot.commands.Spin;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -33,6 +34,10 @@ public class ColorSensor extends Subsystem {
   private final Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
   private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
   private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
+
+  //variables from Spin
+  public int commandHalfSpins = 0;
+  public int commandFullSpins = 0;
 
   public ColorSensor() {
     m_colorMatcher.addColorMatch(kBlueTarget);
@@ -66,9 +71,15 @@ public class ColorSensor extends Subsystem {
     // putting the values onto Shuffleboard
     SmartDashboard.putNumber("Red", detectedColor.red);
     SmartDashboard.putNumber("Green", detectedColor.green);
-    SmartDashboard.putNumber("Confidence", match.confidence);
     SmartDashboard.putNumber("Blue", detectedColor.blue);
+    SmartDashboard.putNumber("Confidence", match.confidence);
+   
     SmartDashboard.putString("DetectedColor", colorString);
+  }
+
+  public void reportSpinsToDashboard() {
+    SmartDashboard.putNumber("Half Spins", commandHalfSpins);
+    SmartDashboard.putNumber("Full Spins", commandFullSpins);
   }
 
   // Wrapper class
@@ -78,8 +89,7 @@ public class ColorSensor extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    //setDefaultCommand(new Spin());
   }
 
   public Color getColor() {
