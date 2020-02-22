@@ -37,7 +37,7 @@ public class Spin extends Command {
   protected void initialize() {
     initialColor = Robot.sensor.getColor();
     previousColor = Robot.sensor.getColor();
-    //start turning
+    // start turning
     Robot.sensor.turn(0.5);
   }
 
@@ -46,20 +46,20 @@ public class Spin extends Command {
   protected void execute() {
     currentColor = Robot.sensor.getColor();
 
-    //if sensor sees initial color and the wheel has moved, then the wheel has turned halfway
+    // if sensor sees initial color and the wheel has moved, then the wheel has turned halfway
     if (currentColor.equals(initialColor) && !(currentColor.equals(previousColor))) {
       halfSpins++;
-      //update number of full spins
-      fullSpins = (int)(halfSpins / 2);
+      // update number of full spins
+      fullSpins = (int) (halfSpins / 2);
     }
-    
+
     previousColor = Robot.sensor.getColor();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    //stop spinning when done enough spins
+    // stop spinning when done enough spins
     if (fullSpins > 3) {
       return true;
     }
