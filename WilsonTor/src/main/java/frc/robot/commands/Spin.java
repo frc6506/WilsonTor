@@ -27,8 +27,8 @@ public class Spin extends Command {
   }
 
   public Color initialColor;
-  public Color testedColor;
-  public Color prevColor;
+  public Color currentColor;
+  public Color previousColor;
   public int colorCount = 0;
 
   // Called just before this Command runs the first time
@@ -41,17 +41,17 @@ public class Spin extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    testedColor = Robot.sensor.getColor();
-    if (testedColor.equals(initialColor) && !(testedColor.equals(prevColor))) {
+    currentColor = Robot.sensor.getColor();
+    if (currentColor.equals(initialColor) && !(currentColor.equals(previousColor))) {
       colorCount++;
     }
-    prevColor = Robot.sensor.getColor();
+    previousColor = Robot.sensor.getColor();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if (colorCount > 6) {
+    if (colorCount > 6) { //every spin is 2 colorCounts
       return true;
     }
     return false;
