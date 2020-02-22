@@ -51,7 +51,6 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     drivetrain.initializeGyro();
     drivetrain.calibrate();
-
   }
 
   /**
