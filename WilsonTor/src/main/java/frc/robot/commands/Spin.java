@@ -66,7 +66,7 @@ public class Spin extends Command {
     if (fullSpins > 3) {
       return true;
     }
-  
+
     return false;
   }
 

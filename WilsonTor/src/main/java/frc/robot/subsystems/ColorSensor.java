@@ -35,7 +35,7 @@ public class ColorSensor extends Subsystem {
   private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
   private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
-  //variables from Spin
+  // variables from Spin
   public int commandHalfSpins = 0;
   public int commandFullSpins = 0;
 
@@ -73,7 +73,7 @@ public class ColorSensor extends Subsystem {
     SmartDashboard.putNumber("Green", detectedColor.green);
     SmartDashboard.putNumber("Blue", detectedColor.blue);
     SmartDashboard.putNumber("Confidence", match.confidence);
-   
+
     SmartDashboard.putString("DetectedColor", colorString);
   }
 
@@ -89,7 +89,7 @@ public class ColorSensor extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    //setDefaultCommand(new Spin());
+    // setDefaultCommand(new Spin());
   }
 
   public Color getColor() {
