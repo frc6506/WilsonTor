@@ -51,7 +51,7 @@ public class Spin extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if (colorCount > 6) { //every spin is 2 colorCounts
+    if (colorCount > 6) { // every spin is 2 colorCounts
       return true;
     }
     return false;
