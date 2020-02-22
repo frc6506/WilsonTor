@@ -25,26 +25,25 @@ public class Spin extends Command {
     // eg. requires(chassis);
     requires(Robot.sensor);
   }
+
   public Color initialColor;
   public Color testedColor;
   public Color prevColor;
   public int colorCount = 0;
-
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     initialColor = Robot.sensor.getColor();
     Robot.sensor.turn(0.5);
-
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
     testedColor = Robot.sensor.getColor();
-    if(testedColor.equals(initialColor) && !(testedColor.equals(prevColor))) {
-        colorCount++;
+    if (testedColor.equals(initialColor) && !(testedColor.equals(prevColor))) {
+      colorCount++;
     }
     prevColor = Robot.sensor.getColor();
   }
@@ -52,11 +51,10 @@ public class Spin extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(colorCount>6) {
-        return true;
+    if (colorCount > 6) {
+      return true;
     }
     return false;
-
   }
 
   // Called once after isFinished returns true
