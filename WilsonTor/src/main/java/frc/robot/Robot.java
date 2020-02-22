@@ -21,6 +21,7 @@ import frc.robot.subsystems.Climb;
 import frc.robot.utils.Limelight;
 import edu.wpi.first.wpilibj.util.Color;
 
+import frc.robot.subsystems.ColorSensor;
 import com.revrobotics.ColorSensorV3;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorMatch;
@@ -64,6 +65,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     SmartDashboard.putNumber("tx", Limelight.returnHorizontalOffset());
     SmartDashboard.putNumber("ty", Limelight.returnVerticalOffset());
+  }
   /**
    * This function is called once each time the robot enters Disabled mode. You can use it to reset
    * any subsystem information you want to clear when the robot is disabled.
