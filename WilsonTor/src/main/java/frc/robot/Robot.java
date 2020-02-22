@@ -22,6 +22,7 @@ import frc.robot.subsystems.ColorSensor;
 import frc.robot.utils.Limelight;
 import edu.wpi.first.wpilibj.util.Color;
 
+import frc.robot.subsystems.ColorSensor;
 import com.revrobotics.ColorSensorV3;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorMatch;
@@ -51,7 +52,6 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     drivetrain.initializeGyro();
     drivetrain.calibrate();
-
   }
 
   /**
