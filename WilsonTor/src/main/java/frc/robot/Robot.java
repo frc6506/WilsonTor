@@ -39,19 +39,7 @@ public class Robot extends TimedRobot {
   public static Drivetrain drivetrain = new Drivetrain();
   public static Arm armMotor = new Arm();
   public static Climb climbDevice = new Climb();
-
-  // color sensor
-  private final I2C.Port i2cPort = I2C.Port.kOnboard;
-  private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
-  private final ColorMatch m_colorMatcher = new ColorMatch();
-
-  private final Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
-  private final Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
-  private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
-  private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
-
-  Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
+  public static ColorSensor sensor = new ColorSensor();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -63,10 +51,6 @@ public class Robot extends TimedRobot {
     drivetrain.initializeGyro();
     drivetrain.calibrate();
 
-    m_colorMatcher.addColorMatch(kBlueTarget);
-    m_colorMatcher.addColorMatch(kGreenTarget);
-    m_colorMatcher.addColorMatch(kRedTarget);
-    m_colorMatcher.addColorMatch(kYellowTarget);
   }
 
   /**
@@ -80,33 +64,6 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     SmartDashboard.putNumber("tx", Limelight.returnHorizontalOffset());
     SmartDashboard.putNumber("ty", Limelight.returnVerticalOffset());
-
-    Color detectedColor = m_colorSensor.getColor();
-
-    String colorString;
-    ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
-
-    // color algorithm
-    if (match.color == kBlueTarget) {
-      colorString = "Blue";
-    } else if (match.color == kGreenTarget) {
-      colorString = "Green";
-    } else if (match.color == kRedTarget) {
-      colorString = "Red";
-    } else if (match.color == kYellowTarget) {
-      colorString = "Yellow";
-    } else {
-      colorString = "Unknown";
-    }
-
-    // putting the values onto Shuffleboard
-    SmartDashboard.putNumber("Red", detectedColor.red);
-    SmartDashboard.putNumber("Green", detectedColor.green);
-    SmartDashboard.putNumber("Confidence", match.confidence);
-    SmartDashboard.putNumber("Blue", detectedColor.blue);
-    SmartDashboard.putString("DetectedColor", colorString);
-  }
-
   /**
    * This function is called once each time the robot enters Disabled mode. You can use it to reset
    * any subsystem information you want to clear when the robot is disabled.
