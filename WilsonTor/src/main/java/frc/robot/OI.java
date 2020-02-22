@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.Spin;
 /**
  * This class is the glue that binds the controls on the physical operator interface to the commands
  * and command groups that allow control of the robot.
@@ -25,6 +26,7 @@ public class OI {
   public Joystick controller = new Joystick(RobotMap.CONTROLLER_PORT_ID);
   public Button abutton = new JoystickButton(controller, RobotMap.A_BUTTON_ID);
   public Button bbutton = new JoystickButton(controller, RobotMap.B_BUTTON_ID);
+  public Button xbutton = new JoystickButton(controller, RobotMap.X_BUTTON_ID); 
 
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to
@@ -37,6 +39,10 @@ public class OI {
   // Start the command when the button is pressed and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenPressed(new ExampleCommand());
+  public void buttonPressC(){
+    xbutton.whenPressed(new Spin());
+  }
+  
 
   // Run the command while the button is being held down and interrupt it once
   // the button is released.
