@@ -40,7 +40,7 @@ public class Position extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    
+
     testedColor = Robot.sensor.getColor();
     if (testedColor.equals(initialColor) && !(testedColor.equals(prevColor))) {
       colorCount++;

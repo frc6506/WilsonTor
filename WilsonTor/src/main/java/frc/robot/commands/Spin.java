@@ -38,13 +38,12 @@ public class Spin extends Command {
   protected void initialize() {
     initialColor = Robot.sensor.getColorMatch();
     previousColor = Robot.sensor.getColorMatch();
-    
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //System.out.println("running Spin execute");
+    // System.out.println("running Spin execute");
     Robot.sensor.commandHalfSpins = halfSpins;
     Robot.sensor.commandFullSpins = fullSpins;
 
@@ -67,10 +66,11 @@ public class Spin extends Command {
   @Override
   protected boolean isFinished() {
     // stop spinning when done enough spins
-    if (fullSpins > 3) {Robot.sensor.turn(0);
+    if (fullSpins > 3) {
+      Robot.sensor.turn(0);
       return true;
     }
-    
+
     return false;
   }
 
