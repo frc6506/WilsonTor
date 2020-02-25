@@ -33,13 +33,14 @@ public class Position extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    System.out.println("command Position initialized");
     Robot.sensor.turn(0.5);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
+    
     testedColor = Robot.sensor.getColor();
     if (testedColor.equals(initialColor) && !(testedColor.equals(prevColor))) {
       colorCount++;

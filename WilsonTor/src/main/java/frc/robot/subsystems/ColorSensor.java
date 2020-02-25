@@ -95,4 +95,8 @@ public class ColorSensor extends Subsystem {
   public Color getColor() {
     return m_colorSensor.getColor();
   }
+
+  public Color getColorMatch() {
+    return match.color;
+  }
 }

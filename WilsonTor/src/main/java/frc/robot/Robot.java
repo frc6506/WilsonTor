@@ -68,6 +68,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("ty", Limelight.returnVerticalOffset());
     sensor.updateColor();
     sensor.reportColorToDashboard();
+    sensor.reportSpinsToDashboard();
   }
   /**
    * This function is called once each time the robot enters Disabled mode. You can use it to reset
