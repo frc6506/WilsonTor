@@ -80,6 +80,8 @@ public class ColorSensor extends Subsystem {
   public void reportSpinsToDashboard() {
     SmartDashboard.putNumber("Half Spins", commandHalfSpins);
     SmartDashboard.putNumber("Full Spins", commandFullSpins);
+    System.out.println("Half Spins: " + commandHalfSpins);
+    System.out.println("Full Spins: " + commandHalfSpins);
   }
 
   // Wrapper class

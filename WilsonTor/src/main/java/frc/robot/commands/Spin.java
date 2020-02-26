@@ -38,35 +38,37 @@ public class Spin extends Command {
   protected void initialize() {
     initialColor = Robot.sensor.getColorMatch();
     previousColor = Robot.sensor.getColorMatch();
+    halfSpins = 0;
+    fullSpins = 0;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
     // System.out.println("running Spin execute");
-    Robot.sensor.commandHalfSpins = halfSpins;
-    Robot.sensor.commandFullSpins = fullSpins;
 
     currentColor = Robot.sensor.getColorMatch();
 
     // if sensor sees initial color and the wheel has moved, then the wheel has turned halfway
-    /*
+
     if (currentColor.equals(initialColor) && !(currentColor.equals(previousColor))) {
       halfSpins++;
       // update number of full spins
       fullSpins = (int) (halfSpins / 2);
     }
-    */
 
     previousColor = Robot.sensor.getColorMatch();
     Robot.sensor.turn(0.5);
+
+    Robot.sensor.commandHalfSpins = halfSpins;
+    Robot.sensor.commandFullSpins = fullSpins;
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     // stop spinning when done enough spins
-    if (fullSpins > 3) {
+    if (fullSpins >= 3) {
       Robot.sensor.turn(0);
       return true;
     }
@@ -83,5 +85,7 @@ public class Spin extends Command {
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
-  protected void interrupted() {}
+  protected void interrupted() {
+    Robot.sensor.turn(0);
+  }
 }
