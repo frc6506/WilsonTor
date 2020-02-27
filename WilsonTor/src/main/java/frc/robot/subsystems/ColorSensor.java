@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.I2C;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import edu.wpi.first.wpilibj.util.Color;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 /** Add your docs here. */
 public class ColorSensor extends Subsystem {
@@ -44,6 +45,8 @@ public class ColorSensor extends Subsystem {
     m_colorMatcher.addColorMatch(kGreenTarget);
     m_colorMatcher.addColorMatch(kRedTarget);
     m_colorMatcher.addColorMatch(kYellowTarget);
+    
+    sensorMotor.setNeutralMode(NeutralMode.Brake);
   }
 
   Color detectedColor = m_colorSensor.getColor();
@@ -80,8 +83,6 @@ public class ColorSensor extends Subsystem {
   public void reportSpinsToDashboard() {
     SmartDashboard.putNumber("Half Spins", commandHalfSpins);
     SmartDashboard.putNumber("Full Spins", commandFullSpins);
-    System.out.println("Half Spins: " + commandHalfSpins);
-    System.out.println("Full Spins: " + commandHalfSpins);
   }
 
   // Wrapper class

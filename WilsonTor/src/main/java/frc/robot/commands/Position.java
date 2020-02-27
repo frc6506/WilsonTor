@@ -22,56 +22,66 @@ public class Position extends Command {
   }
 
   public Color initialColor;
-  public Color testedColor;
-  public Color prevColor;
-  public int colorCount = 0;
-  private final Color BLUE = ColorMatch.makeColor(0.143, 0.427, 0.429);
-  private final Color GREEN = ColorMatch.makeColor(0.197, 0.561, 0.240);
-  private final Color RED = ColorMatch.makeColor(0.561, 0.232, 0.114);
-  private final Color YELLOW = ColorMatch.makeColor(0.361, 0.524, 0.113);
+  public boolean passedInitialColor = false;
+  private final Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
+  private final Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
+  private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
+  private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     System.out.println("command Position initialized");
-    Robot.sensor.turn(0.5);
+    initialColor = Robot.sensor.getColorMatch();
+    passedInitialColor = false;
+    Robot.sensor.turn(0.19);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-    testedColor = Robot.sensor.getColor();
-    if (testedColor.equals(initialColor) && !(testedColor.equals(prevColor))) {
-      colorCount++;
-    }
-    prevColor = Robot.sensor.getColor();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     String gameData;
-    gameData = DriverStation.getInstance().getGameSpecificMessage();
+    gameData = "B";
+    //gameData = DriverStation.getInstance().getGameSpecificMessage();
+    if (!Robot.sensor.getColorMatch().equals(initialColor)) {
+      passedInitialColor = true;
+    }
     if (gameData.length() > 0) {
       switch (gameData.charAt(0)) {
         case 'B':
-          if (Robot.sensor.getColor().equals(RED)) {
+          //red
+          //to hit red, stop at green
+          if (Robot.sensor.getColorMatch().equals(kBlueTarget) && passedInitialColor) {
+            Robot.sensor.turn(0);                 //change back to green
             return true;
           }
           break;
         case 'G':
-          if (Robot.sensor.getColor().equals(YELLOW)) {
+          //yellow
+          //to hit yellow, stop at red
+          if (Robot.sensor.getColorMatch().equals(kRedTarget) && passedInitialColor) {
+            Robot.sensor.turn(0);
             return true;
           }
           break;
         case 'R':
-          if (Robot.sensor.getColor().equals(BLUE)) {
+          //blue
+          //to hit blue, stop at yellow
+          if (Robot.sensor.getColorMatch().equals(kYellowTarget) && passedInitialColor) {
+            Robot.sensor.turn(0);                 //change back to yellow
             return true;
           }
           break;
         case 'Y':
-          if (Robot.sensor.getColor().equals(GREEN)) {
+          //red
+          //to hit red, stop at blue
+          if (Robot.sensor.getColorMatch().equals(kBlueTarget) && passedInitialColor) {
+            Robot.sensor.turn(0);
             return true;
           }
           break;
@@ -87,6 +97,11 @@ public class Position extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    //accounts for slight overshoot
+    for (int i = 0; i < 2000; i++) {
+      Robot.sensor.turn(-0.2);
+    }
+
     Robot.sensor.turn(0);
   }
 

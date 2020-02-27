@@ -9,7 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
+/*import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -17,8 +17,8 @@ import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.I2C;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
+import frc.robot.OI;*/
 import edu.wpi.first.wpilibj.util.Color;
-import frc.robot.OI;
 
 public class Spin extends Command {
   public Spin() {
@@ -58,7 +58,7 @@ public class Spin extends Command {
     }
 
     previousColor = Robot.sensor.getColorMatch();
-    Robot.sensor.turn(0.5);
+    Robot.sensor.turn(0.25);
 
     Robot.sensor.commandHalfSpins = halfSpins;
     Robot.sensor.commandFullSpins = fullSpins;

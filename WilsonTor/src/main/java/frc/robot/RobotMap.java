@@ -45,6 +45,7 @@ public class RobotMap {
   public static final int A_BUTTON_ID = 0;
   public static final int B_BUTTON_ID = 0;
   public static final int X_BUTTON_ID = 3; // For Spin.java command
+  public static final int Y_BUTTON_ID = 4;
   // backwards button
   // public static final int JOYSTICK_LEFT_TRIGGER_ID = 0;
 
