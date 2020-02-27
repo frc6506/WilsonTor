@@ -45,7 +45,7 @@ public class ColorSensor extends Subsystem {
     m_colorMatcher.addColorMatch(kGreenTarget);
     m_colorMatcher.addColorMatch(kRedTarget);
     m_colorMatcher.addColorMatch(kYellowTarget);
-    
+
     sensorMotor.setNeutralMode(NeutralMode.Brake);
   }
 

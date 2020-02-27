@@ -30,7 +30,6 @@ public class OI {
   public Button xbutton = new JoystickButton(controller, RobotMap.X_BUTTON_ID);
   public Button ybutton = new JoystickButton(controller, RobotMap.Y_BUTTON_ID);
 
-
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to
   // commands the same as any other Button.

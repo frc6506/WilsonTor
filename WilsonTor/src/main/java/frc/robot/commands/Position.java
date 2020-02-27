@@ -39,47 +39,46 @@ public class Position extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
-  }
+  protected void execute() {}
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     String gameData;
     gameData = "B";
-    //gameData = DriverStation.getInstance().getGameSpecificMessage();
+    // gameData = DriverStation.getInstance().getGameSpecificMessage();
     if (!Robot.sensor.getColorMatch().equals(initialColor)) {
       passedInitialColor = true;
     }
     if (gameData.length() > 0) {
       switch (gameData.charAt(0)) {
         case 'B':
-          //red
-          //to hit red, stop at green
+          // red
+          // to hit red, stop at green
           if (Robot.sensor.getColorMatch().equals(kBlueTarget) && passedInitialColor) {
-            Robot.sensor.turn(0);                 //change back to green
+            Robot.sensor.turn(0); // change back to green
             return true;
           }
           break;
         case 'G':
-          //yellow
-          //to hit yellow, stop at red
+          // yellow
+          // to hit yellow, stop at red
           if (Robot.sensor.getColorMatch().equals(kRedTarget) && passedInitialColor) {
             Robot.sensor.turn(0);
             return true;
           }
           break;
         case 'R':
-          //blue
-          //to hit blue, stop at yellow
+          // blue
+          // to hit blue, stop at yellow
           if (Robot.sensor.getColorMatch().equals(kYellowTarget) && passedInitialColor) {
-            Robot.sensor.turn(0);                 //change back to yellow
+            Robot.sensor.turn(0); // change back to yellow
             return true;
           }
           break;
         case 'Y':
-          //red
-          //to hit red, stop at blue
+          // red
+          // to hit red, stop at blue
           if (Robot.sensor.getColorMatch().equals(kBlueTarget) && passedInitialColor) {
             Robot.sensor.turn(0);
             return true;
@@ -97,7 +96,7 @@ public class Position extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    //accounts for slight overshoot
+    // accounts for slight overshoot
     for (int i = 0; i < 2000; i++) {
       Robot.sensor.turn(-0.2);
     }
